@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>To do list</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <input type="text" class="txtb" placeholder="Add a task">
+            <div class="notcomp">
+                <h3>Not Completed</h3>
+            </div>
+            <div class="comp">
+                <h3>Completed</h3>
+            </div>
+        </div>
+        
+        <script>
+            $(".txtb").on("keyup", function(e){
+                if(e.keyCode == 13 && $(".txtb").val() != ""){
+                    var task = $("<div class='task'></div>").text($(".txtb").val());
+                    var del = $("<i class='fa fa-trash' aria-hidden='true'></i>").click(function(){
+                        var p = $(this).parent();
+                        p.fadeOut(function(){
+                            p.remove();
+                        })
+                    });
+                    var check = $("<i class='fa fa-check' aria-hidden='true'></i>").click(function(){
+                        var p = $(this).parent();
+                        p.fadeOut(function(){
+                            $(".comp").append(p);
+                            p.fadeIn();
+                        });
+                        $(this).remove();
+                    });
+                    task.append(del, check);
+                    $(".notcomp").append(task);
+                    $(".txtb").val("");
+                }
+            })
+        </script>
+    </body>
+</html>
